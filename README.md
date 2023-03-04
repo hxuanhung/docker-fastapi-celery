@@ -14,13 +14,13 @@ sh local_env_up.sh
 sudo docker-compose -f docker-compose.yml up --scale worker=2 --build
 ```
 
-It starts a webservice with rest api and listens for messages at localhost:5000
+It starts a webservice with rest api and listens for messages at localhost:8090
 
 #### Test over REST api
 
 ```bash
 curl -X POST \
-  http://localhost:5000/task_hello_world/ \
+  http://localhost:8090/task_hello_world/ \
   -H 'content-type: application/json' \
   -d '{ "name":"world" }'
 ```
@@ -33,13 +33,13 @@ Access-Control-Allow-Origin: *
 
 {
     "id":"a86327b8-2d9b-470d-96a9-a27ad87e2c49",
-    "url":"localhost:5000/check_task/a86327b8-2d9b-470d-96a9-a27ad87e2c49"
+    "url":"localhost:8090/check_task/a86327b8-2d9b-470d-96a9-a27ad87e2c49"
 }
 ```
 and on hitting above url using curl
 ```
 curl -X GET \
-  localhost:5000/check_task/a86327b8-2d9b-470d-96a9-a27ad87e2c49
+  localhost:8090/check_task/a86327b8-2d9b-470d-96a9-a27ad87e2c49
 
 ```
 we get status of the task ,and on completion it will return the final output of api
@@ -87,7 +87,7 @@ when task is in FAILURE state we get:
 FAILURE state can be reproduced :
 ```
 curl -X POST \
-  http://localhost:5000/task_hello_world \
+  http://localhost:8090/task_hello_world \
   -H 'content-type: application/json' \
   -d '{
 	"name":"error"	

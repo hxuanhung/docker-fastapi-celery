@@ -9,7 +9,7 @@ services:
       REDISSERVER: redis://redis_server:6379
       C_FORCE_ROOT: "true"
     ports:
-      - "5000:80"
+      - "8090:80"
     depends_on:
       - redis_server
   worker:
@@ -26,7 +26,7 @@ services:
 
   flower:
     image: mher/flower
-    command: ["flower", "--broker=redis://redis_server:6379", "--port=5555"]
+    command: ["celery", "--broker=redis://redis_server:6379/0", "flower", "--port=5555"]
     ports:
       - "5555:5555"
     depends_on:

@@ -21,8 +21,13 @@ services:
       C_FORCE_ROOT: "true"
     depends_on:
       - redis_server
+      
   redis_server:
     image: redis
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
 
   flower:
     image: mher/flower
